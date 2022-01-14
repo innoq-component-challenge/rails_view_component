@@ -1,0 +1,15 @@
+<section class="card">
+  <div class="card-body">
+    <%= content_tag @heading_tag, class: "card-title" do %>
+      <% if @href.present? %>
+        <%= link_to heading, @href %>
+      <% else %>
+        <%= heading %>
+      <% end %>
+    <% end %>
+    <p class="card-text"><%= content %></p>
+  </div>
+  <% if footer.present? %>
+    <div class="card-footer"><%= footer %></div>
+  <% end %>
+</section>

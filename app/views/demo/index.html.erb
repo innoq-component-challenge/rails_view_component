@@ -1,0 +1,95 @@
+<div id="app" class="container">
+
+  <h1>Badges</h1>
+  <div>
+    This is a <%= render(BadgeComponent.new(type: "danger")) { "Badge" } %>
+  </div>
+
+  <h1 class="mt-5">Buttons</h1>
+  <%= render(ButtonComponent.new) { "Simple Button" } %>
+  <hr />
+  <%= render(ButtonComponent.new(style: "cta", additional_classes: "text-uppercase")) { "CTA Button with uppercase" } %>
+  <hr />
+  <%= render(ButtonComponent.new("data-foo": "bar", "aria-live": "polite")) { "Button with additional attributes" } %>
+  <hr />
+  <%= render(ButtonComponent.new(type: "button", name: "action", value: "delete")) { "Button with name and value" } %>
+
+  <h1 class="mt-5">Cards</h1>
+  <%= render(CardComponent.new(heading_level: "2")) do |card| %>
+    <% card.heading do %>
+      <span lang="de">Großartige</span> Card
+    <% end %>
+    <% card.footer do %>
+      This is the footer!
+    <% end %>
+    Welcome to the <strong>best card</strong>
+  <% end %>
+
+  <hr />
+
+  <%= render(CardComponent.new(heading_level: "2", href: "#foo")) do |card| %>
+    <% card.heading do %>
+      Another Card with a Link as <%= render(BadgeComponent.new) { "Header" } %>
+    <% end %>
+    Content baby!
+  <% end %>
+
+  <h1 class="mt-5">List</h1>
+
+  <%= render(ListComponent.new) do |list| %>
+    <% list.item("Type", "Car") %>
+    <% list.item(nil, "Bar") do |item| %>
+      <%= item.key do %>
+        <a href="https://example.com">Foo</a>
+      <% end %>
+    <% end %>
+    <% list.item("Color") do |item| %>
+      <%= item.value do %>
+        <span lang="de">Etwas</span> <%= render(BadgeComponent.new()) { "text" } %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <h1 class="mt-5">MagicHeaders</h1>
+
+  <%= render(MagicHeadersComponent.new) do |mh| %>
+    <article>
+      <header>
+        <%= mh.heading("Some h1") %>
+        <p class="tagline">
+          Content
+        </p>
+      </header>
+      <% mh.section do |mh| %>
+        <section>
+          <%= mh.heading("Some h2") %>
+        </section>
+        <p>Some more content</p>
+        <% mh.section do |mh| %>
+          <div class="foo bar">
+            <%= mh.heading("Some h3") %>
+          </div>
+          <p>Some more content</p>
+        <% end %>
+      <% end %>
+      <% mh.section do |mh| %>
+        <section>
+          <%= mh.heading("Again some h2") %>
+        </section>
+        <p>Some more content</p>
+      <% end %>
+    </article>
+  <% end %>
+
+  <h1 class="mt-5">Form Group</h1>
+
+  <%= render(FieldGroupComponent.new(label: "Name", name: "name")) %>
+
+  <%= render(FieldGroupComponent.new(type: "email", id: "my-email",
+                                     label: "eMail",
+                                     name: "users_email", value: "BOOM",
+                                     error: "'BOOM' is not a valid eMail addreess")) %>
+
+  <%= "TODO: is there an integration into form builders?" %>
+
+</div>
